@@ -81,11 +81,12 @@ def softmax_loss(Z, y):
         Average softmax loss over the sample.
     """
     ### BEGIN YOUR CODE
-    return (np.sum(np.log(np.sum(np.exp(Z), axis = 1))) - np.sum(Z[np.arange(y.size), y])) / y.size
+    # answer (ref)
+    # return (np.sum(np.log(np.sum(np.exp(Z), axis = 1))) - np.sum(Z[np.arange(y.size), y])) / y.size
     
-    ### another way
-    # softmax = np.exp(Z - np.max(Z, axis=1, keepdims=True)) / np.sum(np.exp(Z - np.max(Z, axis=1, keepdims=True)), axis=1, keepdims=True)
-    # return -np.sum(np.log(softmax[np.arange(y.size), y])) / y.size
+    ### another way (more computationally efficient)
+    softmax = np.exp(Z - np.max(Z, axis=1, keepdims=True)) / np.sum(np.exp(Z - np.max(Z, axis=1, keepdims=True)), axis=1, keepdims=True)
+    return -np.sum(np.log(softmax[np.arange(y.size), y])) / y.size
     ### END YOUR CODE
 
 
