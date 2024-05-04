@@ -85,8 +85,8 @@ def softmax_loss(Z, y):
     # return (np.sum(np.log(np.sum(np.exp(Z), axis = 1))) - np.sum(Z[np.arange(y.size), y])) / y.size
     
     ### another way (more computationally efficient)
-    softmax = np.exp(Z - np.max(Z, axis=1, keepdims=True)) / np.sum(np.exp(Z - np.max(Z, axis=1, keepdims=True)), axis=1, keepdims=True)
-    return -np.sum(np.log(softmax[np.arange(y.size), y])) / y.size
+    softmax = np.exp(Z - np.max(Z, axis=1, keepdims=True)) / np.sum(np.exp(Z - np.max(Z, axis=1, keepdims=True)), axis=1, keepdims=True) # exp(h_i (x)) / sum from j = 1 to k ( exp(h_j (x))
+    return -np.sum(np.log(softmax[np.arange(y.size), y])) / y.size # - h_y (x) + log (sum from j = 1 to k (exp(h_j (x))))
     ### END YOUR CODE
 
 
